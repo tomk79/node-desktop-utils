@@ -20,13 +20,16 @@ module.exports = new (function(){
 	this.open = function( item ){
 		if( !supported ){ return false; }
 		var spawn = require('child_process').spawn;
+		var fs = require('fs');
 		var cmd = 'open';
 		if(process.platform == 'win32'){
 			cmd = 'explorer';
 			if( item.match(new RegExp('^(?:https?|data)\\:','i')) ){
 				// OS依存しないのでスルー
-			}else if( _fs.existsSync(item) ){
-				url = _fs.realpathSync(item);
+			}else if( fs.existsSync(item) ){
+				item = fs.realpathSync(item);
+			}else{
+				item = require('path').resolve(item);
 			}
 		}
 		return spawn( cmd, [item], {} );
@@ -47,7 +50,7 @@ module.exports = new (function(){
 
 		if(!appName.length){return false;}
 
-		var path_data_dir = '/./'+(process.env.HOME||process.env.LOCALAPPDATA) + '/.'+appName+'/';
+		var path_data_dir = (process.env.HOME||process.env.LOCALAPPDATA) + '/.'+appName+'/';
 		path_data_dir = path.resolve(path_data_dir);
 		return path_data_dir;
 	}
