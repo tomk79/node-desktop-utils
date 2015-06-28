@@ -4,7 +4,7 @@
   "description": "",
   "main": "libs/main.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --ui tdd ./tests/"
+    "test": "mocha --ui tdd ./tests/"
   },
   "author": "Tomoya Koyanagi",
   "license": "MIT",
