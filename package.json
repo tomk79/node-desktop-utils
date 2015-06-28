@@ -1,0 +1,20 @@
+{
+  "name": "desktop-utils",
+  "version": "0.0.1",
+  "description": "",
+  "main": "libs/main.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --ui tdd ./tests/"
+  },
+  "author": "Tomoya Koyanagi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tomk79/node-desktop-utils.git"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "^2.1.0"
+  }
+}
