@@ -16,12 +16,13 @@ describe('Interfaces', function() {
 describe('open()', function() {
 
 	it('Open directory', function(done) {
+		this.timeout(2*60*1000);
 		var spawn = desktopUtils.open('./');
 		assert.equal(typeof(spawn), typeof({}));
-		// spawn.kill('SIGTERM');
+		spawn.kill('SIGTERM');
 		setTimeout(function(){
 			done();
-		}, 1900);
+		}, 3000);
 	});
 
 });
