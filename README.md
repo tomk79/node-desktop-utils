@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-$ npm install desktop-utils
+$ npm install desktop-utils --save
 ```
 
 ## Usage
@@ -26,6 +26,18 @@ console.log( dir );
     // This returns
     //   - "/Users/{$UserName}/.appname" on darwin(=MacOSX)
     //   - "C:\\Users\\{$UserName}\\.appname" on win32(=Windows)
+
+// is Unix path
+var isUnix = desktopUtils.isUnix();
+console.log( isUnix );
+    // This returns
+    //   - true on darwin(=MacOSX)
+    //   - false on win32(=Windows)
+
+// is Windows path
+var isWindows = desktopUtils.isWindows();
+console.log( isWindows );
+    // This returns
+    //   - false on darwin(=MacOSX)
+    //   - true on win32(=Windows)
 ```
-
-

@@ -2,14 +2,22 @@
  * desktop-utils
  */
 module.exports = new (function(){
-	var supported;
+	var supported = false;
+	var dirSeparator = '/';
 	switch( process.platform ){
 		case 'darwin':
+			dirSeparator = '/';
+			supported = true;
+			break;
 		case 'win32':
-			supported = true; break;
+			dirSeparator = '\\';
+			supported = true;
+			break;
 		default:
-			supported = false; break;
+			supported = false;
+			break;
 	}
+
 
 	/**
 	 * アイテムを開く
@@ -54,5 +62,29 @@ module.exports = new (function(){
 		path_data_dir = path.resolve(path_data_dir);
 		return path_data_dir;
 	}
+
+	/**
+	 * サーバがUNIXパスか調べる。
+	 *
+	 * @return bool UNIXパスなら `true`、それ以外なら `false` を返します。
+	 */
+	this.isUnix = function(){
+		if( dirSeparator == '/' ){
+			return true;
+		}
+		return false;
+	}//isUnix()
+
+	/**
+	 * サーバがWindowsパスか調べる。
+	 *
+	 * @return bool Windowsパスなら `true`、それ以外なら `false` を返します。
+	 */
+	this.isWindows = function(){
+		if( dirSeparator == '\\' ){
+			return true;
+		}
+		return false;
+	}//isWindows()
 
 })();

@@ -13,7 +13,7 @@ describe('Interfaces', function() {
 
 });
 
-describe('open()', function() {
+describe('open(localDirectory)', function() {
 
 	it('Open directory', function(done) {
 		this.timeout(2*60*1000);
@@ -22,7 +22,21 @@ describe('open()', function() {
 		spawn.kill('SIGTERM');
 		setTimeout(function(){
 			done();
-		}, 3000);
+		}, 500);
+	});
+
+});
+
+describe('open(URL)', function() {
+
+	it('Open directory', function(done) {
+		this.timeout(2*60*1000);
+		var spawn = desktopUtils.open('http://www.google.com/');
+		assert.equal(typeof(spawn), typeof({}));
+		spawn.kill('SIGTERM');
+		setTimeout(function(){
+			done();
+		}, 500);
 	});
 
 });
@@ -39,6 +53,33 @@ describe('getLocalDataDir()', function() {
 		assert.equal(path.resolve(pathBase+'/.test-name__5'), desktopUtils.getLocalDataDir('te  s/. /.;/t (-n)a...me/_ &_5'));
 		assert.equal(false, desktopUtils.getLocalDataDir('    '));
 
+		done();
+	});
+
+});
+
+describe('isUnix(), isWindows()', function() {
+	var pathBase = (process.env.HOME||process.env.LOCALAPPDATA);
+	var path = require('path');
+
+	var isUnix = false;
+	var isWindows = false;
+	switch( process.platform ){
+		case 'darwin':
+			isUnix = true;
+			break;
+		case 'win32':
+			isWindows = true;
+			break;
+	}
+
+	it('isUnix()', function(done) {
+		assert.equal(isUnix, desktopUtils.isUnix());
+		done();
+	});
+
+	it('isWindows()', function(done) {
+		assert.equal(isWindows, desktopUtils.isWindows());
 		done();
 	});
 
