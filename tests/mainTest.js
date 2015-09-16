@@ -46,8 +46,15 @@ describe('openIn(App, URL)', function() {
 
 	it('Open URL in Browser', function(done) {
 		this.timeout(2*60*1000);
+
+		if(process.platform == 'darwin'){
+			app = '/Applications/Safari.app';
+		}else if(process.platform == 'win32'){
+			app = 'C:\\Program Files\\Internet Explorer\\iexplore.exe';
+		}
+
 		var spawn = desktopUtils.openIn(
-			'/Applications/Safari.app',
+			app,
 			'http://www.pxt.jp/'
 		);
 		assert.equal(typeof(spawn), typeof({}));
