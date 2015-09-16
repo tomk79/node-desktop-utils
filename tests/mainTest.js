@@ -2,6 +2,7 @@ var assert = require('assert');
 // var path = require('path');
 var fs = require('fs');
 var desktopUtils = require('../libs/main.js');
+var openAppTimer = 0;
 
 describe('Interfaces', function() {
 
@@ -19,24 +20,41 @@ describe('open(localDirectory)', function() {
 		this.timeout(2*60*1000);
 		var spawn = desktopUtils.open('./');
 		assert.equal(typeof(spawn), typeof({}));
-		spawn.kill('SIGTERM');
 		setTimeout(function(){
+			spawn.kill('SIGTERM');
 			done();
-		}, 500);
+		}, openAppTimer);
 	});
 
 });
 
 describe('open(URL)', function() {
 
-	it('Open directory', function(done) {
+	it('Open URL', function(done) {
 		this.timeout(2*60*1000);
-		var spawn = desktopUtils.open('http://www.google.com/');
+		var spawn = desktopUtils.open('http://www.pxt.jp/');
 		assert.equal(typeof(spawn), typeof({}));
-		spawn.kill('SIGTERM');
 		setTimeout(function(){
+			spawn.kill('SIGTERM');
 			done();
-		}, 500);
+		}, openAppTimer);
+	});
+
+});
+
+describe('openIn(App, URL)', function() {
+
+	it('Open URL in Browser', function(done) {
+		this.timeout(2*60*1000);
+		var spawn = desktopUtils.openIn(
+			'/Applications/Safari.app',
+			'http://www.pxt.jp/'
+		);
+		assert.equal(typeof(spawn), typeof({}));
+		setTimeout(function(){
+			spawn.kill('SIGTERM');
+			done();
+		}, openAppTimer);
 	});
 
 });

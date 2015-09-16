@@ -20,7 +20,8 @@ module.exports = new (function(){
 
 
 	/**
-	 * アイテムを開く
+	 * デフォルトのアプリケーションでパスやURLを開く
+	 * 
 	 * @param string item 開くアイテムの URL や ファイル、ディレクトリのパス。
 	 * MacOSXの場合は `open` へ、Windowsの場合は `explorer` へ渡されます。
 	 * @return spawn
@@ -29,18 +30,58 @@ module.exports = new (function(){
 		if( !supported ){ return false; }
 		var spawn = require('child_process').spawn;
 		var fs = require('fs');
+
+		if( item.match(new RegExp('^(?:https?|data)\\:','i')) ){
+			// OS依存しないのでスルー
+		}else if( fs.existsSync(item) ){
+			item = fs.realpathSync(item);
+		}else{
+			item = require('path').resolve(item);
+		}
+
 		var cmd = 'open';
 		if(process.platform == 'win32'){
 			cmd = 'explorer';
-			if( item.match(new RegExp('^(?:https?|data)\\:','i')) ){
-				// OS依存しないのでスルー
-			}else if( fs.existsSync(item) ){
-				item = fs.realpathSync(item);
-			}else{
-				item = require('path').resolve(item);
-			}
 		}
 		return spawn( cmd, [item], {} );
+	}
+
+	/**
+	 * 指定したアプリケーションでパスやURLを開く
+	 * 
+	 * @param string item 開くアイテムの URL や ファイル、ディレクトリのパス。
+	 * MacOSXの場合は `open` へ、Windowsの場合は `explorer` へ渡されます。
+	 * @return spawn
+	 */
+	this.openIn = function( app, item ){
+		if( !supported ){ return false; }
+		var spawn = require('child_process').spawn;
+		var fs = require('fs');
+		var opt, cmd;
+
+		if( item.match(new RegExp('^(?:https?|data)\\:','i')) ){
+			// OS依存しないのでスルー
+		}else if( fs.existsSync(item) ){
+			item = fs.realpathSync(item);
+		}else{
+			item = require('path').resolve(item);
+		}
+
+		if(process.platform == 'darwin'){
+			cmd = 'open';
+			opt = [
+				'-a',
+				app,
+				item
+			];
+
+		}else if(process.platform == 'win32'){
+			cmd = app;
+			opt = [
+				item
+			];
+		}
+		return spawn( cmd, opt, {} );
 	}
 
 	/**

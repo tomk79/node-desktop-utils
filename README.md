@@ -1,5 +1,7 @@
 # node-desktop-utils
 
+Utilities for NodeJs Desktop Application.
+
 ## Installation
 
 ```bash
@@ -19,6 +21,9 @@ desktopUtils.open('./path/to/file.txt');
 
 // Open URL
 desktopUtils.open('http://www.pxt.jp/');
+
+// Open URL in Application
+desktopUtils.openIn('/Applications/Safari.app', http://www.pxt.jp/');
 
 // Get local data directory
 var dir = desktopUtils.getLocalDataDir('appname');
@@ -41,3 +46,7 @@ console.log( isWindows );
     //   - false on darwin(=MacOSX)
     //   - true on win32(=Windows)
 ```
+
+## Author
+
+Tomoya Koyanagi.
