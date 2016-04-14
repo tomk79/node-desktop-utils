@@ -23,7 +23,7 @@ desktopUtils.open('./path/to/file.txt');
 desktopUtils.open('http://www.pxt.jp/');
 
 // Open URL in Application
-desktopUtils.openIn('/Applications/Safari.app', http://www.pxt.jp/');
+desktopUtils.openIn('/Applications/Safari.app', 'http://www.pxt.jp/');
 
 // Get local data directory
 var dir = desktopUtils.getLocalDataDir('appname');
