@@ -47,6 +47,19 @@ console.log( isWindows );
     //   - true on win32(=Windows)
 ```
 
+## Change Log
+
+### desktop-utils v0.1.1 (******)
+
+- Fixed: Bugs about explorer command on Windows.
+
+### desktop-utils v0.1.0 (2016-04-14)
+
+- add: isUnix()
+- add: isWindows()
+- add: openIn()
+
+
 ## Author
 
-Tomoya Koyanagi.
+(C)Tomoya Koyanagi.

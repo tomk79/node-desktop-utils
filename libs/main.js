@@ -29,6 +29,7 @@ module.exports = new (function(){
 	this.open = function( item ){
 		if( !supported ){ return false; }
 		var spawn = require('child_process').spawn;
+		var exec = require('child_process').exec;
 		var fs = require('fs');
 
 		if( item.match(new RegExp('^(?:https?|data)\\:','i')) ){
@@ -42,6 +43,8 @@ module.exports = new (function(){
 		var cmd = 'open';
 		if(process.platform == 'win32'){
 			cmd = 'explorer';
+			item = item.split('"').join(''); // ダブルクオートを削除
+			return exec( cmd + ' "' + item + '"' );
 		}
 		return spawn( cmd, [item], {} );
 	}
@@ -56,6 +59,7 @@ module.exports = new (function(){
 	this.openIn = function( app, item ){
 		if( !supported ){ return false; }
 		var spawn = require('child_process').spawn;
+		var exec = require('child_process').exec;
 		var fs = require('fs');
 		var opt, cmd;
 
@@ -76,10 +80,8 @@ module.exports = new (function(){
 			];
 
 		}else if(process.platform == 'win32'){
-			cmd = app;
-			opt = [
-				item
-			];
+			item = item.split('"').join(''); // ダブルクオートを削除
+			return exec( app + ' "' + item + '"' );
 		}
 		return spawn( cmd, opt, {} );
 	}
