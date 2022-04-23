@@ -49,6 +49,10 @@ console.log( isWindows );
 
 ## Change Log
 
+### desktop-utils v0.1.2 (2022-04-23)
+
+- Fixed: Package repository URL
+
 ### desktop-utils v0.1.1 (2018-08-10)
 
 - Fixed: Bugs about explorer command on Windows.

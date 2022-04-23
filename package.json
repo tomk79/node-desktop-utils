@@ -1,6 +1,6 @@
 {
   "name": "desktop-utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "libs/main.js",
   "scripts": {
@@ -10,9 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/tomk79/node-desktop-utils.git"
-  },
-  "dependencies": {
+    "url": "git+https://github.com/tomk79/node-desktop-utils.git"
   },
   "devDependencies": {
     "mocha": "^2.1.0"
